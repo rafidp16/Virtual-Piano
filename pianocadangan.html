@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Piano Virtual</title>
+  <!-- Tambahkan tautan font Gotham (ganti URL dengan URL font yang valid) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gotham:wght@300&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Gotham', sans-serif; /* Menambahkan font Gotham */
+      background: linear-gradient(to right, #3498db, #6c5ce7);
+      color: #ecf0f1;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    h1 {
+      font-family: 'Gotham', sans-serif; /* Menambahkan font Gotham */
+    }
+
+    header {
+      background: #34495e;
+      color: #ecf0f1;
+      padding: 20px;
+      margin-bottom: 10px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin-top: 20px;
+    }
+
+    .piano {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin-top: 10px;
+    }
+
+    .key-container {
+      position: relative;
+      margin: 0 5px; /* Modifikasi margin untuk memberikan jarak yang lebih besar antara tombol piano */
+    }
+
+    .key {
+      width: 80px; /* Modifikasi lebar tombol piano */
+      height: 400px; /* Modifikasi tinggi tombol piano */
+      background: linear-gradient(to bottom, #3498db, #2980b9);
+      border: 1px solid #2980b9;
+      cursor: pointer;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+    }
+
+    .key span {
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .black-key {
+      width: 60px; /* Modifikasi lebar tombol hitam */
+      height: 300px; /* Modifikasi tinggi tombol hitam */
+      background: #333;
+      cursor: pointer;
+      position: absolute;
+      z-index: 1;
+      border-radius: 5px;
+      margin: 0 3px; /* Modifikasi margin untuk memberikan jarak yang lebih besar antara tombol hitam */
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .black-key:nth-child(1) {
+      margin-left: 60px; /* Modifikasi margin untuk menyesuaikan penempatan tombol hitam */
+    }
+    .black-key:nth-child(2) {
+      margin-left: 180px; /* Modifikasi margin untuk menyesuaikan penempatan tombol hitam */
+    }
+    .black-key:nth-child(3) {
+      margin-left: 300px; /* Modifikasi margin untuk menyesuaikan penempatan tombol hitam */
+    }
+    .black-key:nth-child(4) {
+      margin-left: 420px; /* Modifikasi margin untuk menyesuaikan penempatan tombol hitam */
+    }
+    .black-key:nth-child(5) {
+      margin-left: 540px; /* Modifikasi margin untuk menyesuaikan penempatan tombol hitam */
+    }
+
+    .controls {
+      margin-top: 20px;
+    }
+
+    button {
+      font-size: 16px;
+      padding: 10px 20px;
+      margin: 0 10px;
+      cursor: pointer;
+      background: linear-gradient(to bottom, #3498db, #2980b9);
+      color: #ecf0f1;
+      border: none;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    button:disabled {
+      background: linear-gradient(to bottom, #95a5a6, #7f8c8d);
+      cursor: not-allowed;
+    }
+
+    .key:hover,
+    .black-key:hover,
+    button:hover {
+      background: linear-gradient(to bottom, #2980b9, #25669e);
+      transform: scale(1.1);
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+    }
+
+    .key-box {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 2px solid #3498db;
+      border-radius: 5px;
+      pointer-events: none;
+    }
+
+    .background-decoration {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      opacity: 0.2;
+      background: url('https://i.pinimg.com/originals/84/c4/28/84c4280f6236acbc78cac347c63ed89b.png') center/cover no-repeat;
+    }
+
+    .branding {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: #fff;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-decoration"></div>
+  <header>
+    <h1>Piano Virtual</h1>
+  </header>
+  <div class="container">
+    <section class="piano">
+      <div class="key-container" onclick="playSound('C')">
+        <div class="key">
+          <span>C</span>
+          <div class="key-box"></div>
+        </div>
+      </div>
+      <div class="key-container" onclick="playSound('D')">
+        <div class="key">
+          <span>D</span>
+          <div class="key-box"></div>
+        </div>
+      </div>
+      <div class="key-container" onclick="playSound('E')">
+        <div class="key">
+          <span>E</span>
+          <div class="key-box"></div>
+        </div>
+      </div>
+      <div class="key-container" onclick="playSound('F')">
+        <div class="key">
+          <span>F</span>
+          <div class="key-box"></div>
+        </div>
+      </div>
+      <div class="key-container" onclick="playSound('G')">
+        <div class="key">
+          <span>G</span>
+          <div class="key-box"></div>
+        </div>
+      </div>
+      <div class="key-container" onclick="playSound('A')">
+        <div class="key">
+          <span>A</span>
+          <div class="key-box"></div>
+        </div>
+      </div>
+      <div class="key-container" onclick="playSound('B')">
+        <div class="key">
+          <span>B</span>
+          <div class="key-box"></div>
+        </div>
+      </div>
+    </section>
+    <section class="controls">
+      <button id="recordButton">Rekam</button>
+      <button id="stopButton" disabled>Hentikan</button>
+      <button id="saveButton" disabled>Simpan sebagai MP3</button>
+    </section>
+  </div>
+  <script src="https://unpkg.com/tone"></script>
+  <script src="https://unpkg.com/recorder-js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
