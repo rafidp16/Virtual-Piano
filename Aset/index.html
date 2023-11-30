@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Piano Virtual</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Virtual Piano</title>
   <style>
     body {
       font-family: 'Gotham', sans-serif;
@@ -15,7 +15,7 @@
       text-align: center;
     }
 
-    h1 {
+    h1, h3 {
       font-family: 'Gotham', sans-serif;
     }
 
@@ -24,6 +24,7 @@
       color: #ecf0f1;
       padding: 20px;
       margin-bottom: 10px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
     }
 
     .container {
@@ -52,8 +53,8 @@
         font-weight: bold;
       }
     .key {
-      width: 100px; /*lebar tombol piano*/
-      height: 350px; /*tinggi tombol piano*/
+      width: 120px; /*lebar tombol piano*/
+      height: 400px; /*tinggi tombol piano*/
       background: linear-gradient(to bottom, #3498db, #2980b9);
       border: 1px solid #2980b9;
       cursor: pointer;
@@ -72,15 +73,15 @@
     }
 
     button {
-      font-size: 16px;
-      padding: 10px 20px;
+      font-size: 18px;
+      padding: 15px 30px;
       margin: 0 10px;
       cursor: pointer;
       background: linear-gradient(to bottom, #3498db, #2980b9);
       color: #ecf0f1;
       border: none;
-      border-radius: 5px;
-      transition: background 0.3s;
+      border-radius: 8px;
+      transition: background 0.3s, transform 0.3s;
     }
 
     button:disabled {
@@ -117,67 +118,43 @@
       opacity: 0.2;
       background: url('https://i.pinimg.com/originals/84/c4/28/84c4280f6236acbc78cac347c63ed89b.png') center/cover no-repeat;
     }
-
   </style>
 </head>
+
 <body>
   <div class="background-decoration"></div>
   <header>
-    <h1>Piano Virtual</h1>
+    <h3>VIRTUAL PIANO</h3>
   </header>
   <div class="container">
-    <section class="piano">
-      <div class="key-container" onclick="playSound('C')">
-        <div class="key">
-          <span>C</span>
-          <div class="key-box"></div>
-        </div>
-      </div>
-      <div class="key-container" onclick="playSound('D')">
-        <div class="key">
-          <span>D</span>
-          <div class="key-box"></div>
-        </div>
-      </div>
-      <div class="key-container" onclick="playSound('E')">
-        <div class="key">
-          <span>E</span>
-          <div class="key-box"></div>
-        </div>
-      </div>
-      <div class="key-container" onclick="playSound('F')">
-        <div class="key">
-          <span>F</span>
-          <div class="key-box"></div>
-        </div>
-      </div>
-      <div class="key-container" onclick="playSound('G')">
-        <div class="key">
-          <span>G</span>
-          <div class="key-box"></div>
-        </div>
-      </div>
-      <div class="key-container" onclick="playSound('A')">
-        <div class="key">
-          <span>A</span>
-          <div class="key-box"></div>
-        </div>
-      </div>
-      <div class="key-container" onclick="playSound('B')">
-        <div class="key">
-          <span>B</span>
-          <div class="key-box"></div>
-        </div>
-      </div>
-    </section>
-    <section class="controls">
-      <button id="recordButton">Rekam</button>
-      <button id="stopButton" disabled>Hentikan</button>
-      <button id="saveButton" disabled>Simpan sebagai MP3</button>
-    </section>
+    <div id="note"></div>
+    <div class="piano">
+      <!-- Piano keys will be dynamically added here -->
+    </div>
+    <div class="controls">
+      <button>Control 1</button>
+      <button>Control 2</button>
+      <button>Control 3</button>
+    </div>
   </div>
-  <script src="https://unpkg.com/tone"></script>
-  <script src="https://unpkg.com/recorder-js"></script>
-  <script src="app.js"></script>
+
+  <script>
+    const chords = ["a", "c", "d", "e", "f"];
+    const note = document.getElementById("note");
+
+    chords.forEach(chord => {
+      const button = document.createElement("button");
+
+      button.innerText = chord;
+
+      button.addEventListener("click", () => {
+        const sound = new Audio(`/Aset/${chord}.wav`);
+        sound.play();
+      });
+
+      note.appendChild(button);
+    });
+  </script>
 </body>
+
 </html>
