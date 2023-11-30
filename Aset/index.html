@@ -37,75 +37,77 @@
     }
 
     .piano {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
       justify-content: center;
       align-items: flex-end;
       margin-top: 10px;
     }
 
-    .key-container {
-      position: relative;
-      margin: 0 10px; /*jarak tombol piano*/
-    }
-    .key span {
-        color: #fff;
-        font-size: 35px; /*ukuran font pada tombol*/
-        font-weight: bold;
-      }
-    .key {
-      width: 120px; /*lebar tombol piano*/
-      height: 400px; /*tinggi tombol piano*/
-      background: linear-gradient(to bottom, #3498db, #2980b9);
-      border: 1px solid #2980b9;
+    button {
+      background-color: #3498db;
+      color: #ecf0f1;
+      margin: 3px;
+      height: 150px;
+      width: 100%;
+      border: none;
       cursor: pointer;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      font-size: 16px;
       transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
       position: relative;
       overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 5px;
-    }
-
-    .controls {
-      margin-top: 30px;
-    }
-
-    button {
-      font-size: 18px;
-      padding: 15px 30px;
-      margin: 0 10px;
-      cursor: pointer;
-      background: linear-gradient(to bottom, #3498db, #2980b9);
-      color: #ecf0f1;
-      border: none;
       border-radius: 8px;
-      transition: background 0.3s, transform 0.3s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
     }
 
-    button:disabled {
-      background: linear-gradient(to bottom, #95a5a6, #7f8c8d);
-      cursor: not-allowed;
-    }
-
-    .key:hover,
-    .black-key:hover,
-    button:hover {
-      background: linear-gradient(to bottom, #2980b9, #25669e);
-      transform: scale(1.1);
-      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
-    }
-
-    .key-box {
+    button:before {
+      content: "";
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      border: 2px solid #3498db;
-      border-radius: 5px;
-      pointer-events: none;
+      background: linear-gradient(to bottom, #2980b9, #3498db);
+      border: 1px solid #2980b9;
+      z-index: -1;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    button:active:before {
+      background: linear-gradient(to bottom, #25669e, #2980b9);
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+    }
+
+    button:hover {
+      background: linear-gradient(to bottom, #25669e, #2980b9);
+      transform: scale(1.1);
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+    }
+
+    .note-label {
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .controls {
+      margin-top: 30px;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .controls button {
+      width: 100%;
+      height: 50px;
+      font-size: 14px;
     }
 
     .background-decoration {
@@ -127,25 +129,31 @@
     <h3>VIRTUAL PIANO</h3>
   </header>
   <div class="container">
-    <div id="note"></div>
-    <div class="piano">
+    <div id="note" class="piano">
       <!-- Piano keys will be dynamically added here -->
     </div>
     <div class="controls">
-      <button>Control 1</button>
-      <button>Control 2</button>
-      <button>Control 3</button>
+      <button>Rekam</button>
+      <button>Hentikan</button>
+      <button>Simpan ke mp3</button>
     </div>
   </div>
 
   <script>
-    const chords = ["a", "c", "d", "e", "f"];
+    const chords = ["C", "D", "E", "F", "G"];
     const note = document.getElementById("note");
 
     chords.forEach(chord => {
       const button = document.createElement("button");
+      const label = document.createElement("div");
+
+      button.classList.add("note-button");
+      label.classList.add("note-label");
 
       button.innerText = chord;
+      label.innerText = chord;
+
+      button.appendChild(label);
 
       button.addEventListener("click", () => {
         const sound = new Audio(`/Aset/${chord}.wav`);
