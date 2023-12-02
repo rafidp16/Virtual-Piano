@@ -8,15 +8,19 @@
   <style>
     body {
       font-family: 'Gotham', sans-serif;
-      background: linear-gradient(to right, #1a1a1a, #333);
+      background: linear-gradient(to right, #3498db, #6c5ce7);
       color: #ecf0f1;
       margin: 0;
       padding: 0;
       text-align: center;
     }
 
+    h1, h3 {
+      font-family: 'Gotham', sans-serif;
+    }
+
     header {
-      background: #2c3e50;
+      background: #34495e;
       color: #ecf0f1;
       padding: 20px;
       margin-bottom: 10px;
@@ -30,12 +34,11 @@
       justify-content: center;
       height: 100vh;
       margin-top: 20px;
-      position: relative;
     }
 
     .piano {
       display: grid;
-      grid-template-columns: repeat(7, 1fr); /* Modified to 7 columns */
+      grid-template-columns: repeat(5, 1fr);
       gap: 10px;
       justify-content: center;
       align-items: flex-end;
@@ -45,22 +48,16 @@
     button {
       background-color: #3498db;
       color: #ecf0f1;
-      margin: 5px;
-      height: 400px;
-      width: 100px;
+      margin: 3px;
+      height: 150px;
+      width: 100%;
       border: none;
       cursor: pointer;
       font-size: 16px;
       transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
       position: relative;
       overflow: hidden;
-      border-radius: 10px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-transform: uppercase;
-      font-weight: bold;
+      border-radius: 8px;
     }
 
     button:before {
@@ -100,12 +97,6 @@
 
     .controls button {
       width: 200%;
-      height: 100px;
-      background-color: #2c3e50;
-      color: #ecf0f1;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-      text-transform: uppercase;
-      font-weight: bold;
     }
 
     .background-decoration {
@@ -131,14 +122,14 @@
       <!-- Piano keys will be dynamically added here -->
     </div>
     <div class="controls">
-      <button>Record</button>
-      <button>Stop</button>
-      <button>Save to MP3</button>
+      <button>Rekam</button>
+      <button>Hentikan</button>
+      <button>Simpan ke mp3</button>
     </div>
   </div>
 
   <script>
-    const chords = ["C", "D", "E", "F", "G", "A", "B"]; // Added A and B
+    const chords = ["C", "D", "E", "F", "G"];
     const note = document.getElementById("note");
 
     chords.forEach(chord => {
