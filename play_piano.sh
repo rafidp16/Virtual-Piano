@@ -15,10 +15,10 @@ play_chord() {
 }
 
 # Define file paths for notes and chords
-C_note="c.wav"
-D_note="d.wav"
-E_note="e.wav"
-F_note="f.wav"
-G_note="g.wav"
-A_note="a.wav"
-B_note="b.wav"
+C_note="C.wav"
+D_note="D.wav"
+E_note="E.wav"
+F_note="F.wav"
+G_note="G.wav"
+A_note="A.wav"
+B_note="B.wav"
