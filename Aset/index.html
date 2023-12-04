@@ -35,7 +35,8 @@
     
     .piano {
       display: grid;
-      grid-template-columns: repeat(7, 1fr); /* Modified to 7 columns */
+      grid-template-columns: repeat(7, 1fr);
+      /* Modified to 7 columns */
       gap: 10px;
       justify-content: center;
       align-items: flex-end;
@@ -131,15 +132,22 @@
       <!-- Piano keys will be dynamically added here -->
     </div>
     <div class="controls">
-      <button>Rekam</button>
-      <button>Hentikan</button>
-      <button>Simpan ke mp3</button>
+      <button id="recordBtn">Record</button>
+      <button id="stopBtn" disabled>Stop</button>
+      <button id="saveBtn" disabled>Save to MP3</button>
     </div>
   </div>
 
   <script>
-    const chords = ["C", "D", "E", "F", "G"];
+    const chords = ["C", "D", "E", "F", "G", "A", "B"];
     const note = document.getElementById("note");
+    const recordBtn = document.getElementById("recordBtn");
+    const stopBtn = document.getElementById("stopBtn");
+    const saveBtn = document.getElementById("saveBtn");
+
+    let audioChunks = [];
+    let mediaRecorder;
+    let volume = 1; // Initial volume
 
     chords.forEach(chord => {
       const button = document.createElement("button");
@@ -148,11 +156,62 @@
 
       button.addEventListener("click", () => {
         const sound = new Audio(`/Aset/${chord}.wav`);
+        sound.volume = volume;
         sound.play();
       });
 
       note.appendChild(button);
     });
+
+    recordBtn.addEventListener("click", startRecording);
+    stopBtn.addEventListener("click", stopRecording);
+    saveBtn.addEventListener("click", saveRecording);
+
+    function startRecording() {
+      navigator.mediaDevices.getUserMedia({ audio: true })
+        .then(stream => {
+          mediaRecorder = new MediaRecorder(stream);
+          mediaRecorder.ondataavailable = event => {
+            if (event.data.size > 0) {
+              audioChunks.push(event.data);
+            }
+          };
+          mediaRecorder.onstop = () => {
+            const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+            const audioUrl = URL.createObjectURL(audioBlob);
+            const audio = new Audio(audioUrl);
+            audio.volume = volume;
+            audio.play();
+            saveBtn.disabled = false;
+            recordBtn.disabled = false;
+            stopBtn.disabled = true;
+          };
+          mediaRecorder.start();
+          recordBtn.disabled = true;
+          stopBtn.disabled = false;
+        })
+        .catch(error => console.error('Error accessing microphone:', error));
+    }
+
+    function stopRecording() {
+      mediaRecorder.stop();
+      recordBtn.disabled = false;
+      stopBtn.disabled = true;
+    }
+
+    function saveRecording() {
+      const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+      const url = URL.createObjectURL(audioBlob);
+      const a = document.createElement("a");
+      document.body.appendChild(a);
+      a.style = "display: none";
+      a.href = url;
+      a.download = 'recording.wav';
+      a.click();
+      window.URL.revokeObjectURL(url);
+      audioChunks = [];
+      saveBtn.disabled = true;
+    }
   </script>
 </body>
 

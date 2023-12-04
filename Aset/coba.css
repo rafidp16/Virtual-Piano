@@ -28,7 +28,8 @@ header {
 
 .piano {
   display: grid;
-  grid-template-columns: repeat(7, 1fr); /* Modified to 7 columns */
+  grid-template-columns: repeat(7, 1fr);
+  /* Modified to 7 columns */
   gap: 10px;
   justify-content: center;
   align-items: flex-end;
