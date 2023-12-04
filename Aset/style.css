@@ -1,0 +1,114 @@
+<style>
+body {
+  font-family: 'Gotham', sans-serif;
+  background: linear-gradient(to right, #1a1a1a, #333);
+  color: #ecf0f1;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+header {
+  background: #2c3e50;
+  color: #ecf0f1;
+  padding: 20px;
+  margin-bottom: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin-top: 20px;
+  position: relative;
+}
+
+.piano {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); /* Modified to 7 columns */
+  gap: 10px;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: 10px;
+}
+
+button {
+  background-color: #3498db;
+  color: #ecf0f1;
+  margin: 5px;
+  height: 400px;
+  width: 100px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+button:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, #2980b9, #3498db);
+  border: 1px solid #2980b9;
+  z-index: -1;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:active:before {
+  background: linear-gradient(to bottom, #25669e, #2980b9);
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+}
+
+button:hover {
+  background: linear-gradient(to bottom, #25669e, #2980b9);
+  transform: scale(1.1);
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+}
+
+.controls {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 300px;
+}
+
+.controls button {
+  width: 200%;
+  height: 100px;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.background-decoration {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  opacity: 0.2;
+  background: url('https://i.pinimg.com/originals/84/c4/28/84c4280f6236acbc78cac347c63ed89b.png') center/cover no-repeat;
+}
+</style>
