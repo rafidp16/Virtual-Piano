@@ -155,7 +155,7 @@
       button.innerText = chord;
 
       button.addEventListener("click", () => {
-        const sound = new Audio(`/Aset/${chord}.wav`);
+        const sound = new Audio(`${chord}.wav`);
         sound.volume = volume;
         sound.play();
       });
