@@ -8,7 +8,7 @@ let audioChunks = []; // Menggunakan audioChunks agar konsisten dengan variabel
 chords.forEach(chord => {
     const audio = document.createElement("audio");
     audio.src = `${chord}.wav`;
-    audio.volume = 1;
+    audio.volume = 0.5;
     note.appendChild(audio);
 
     const button = document.createElement("button");
@@ -45,7 +45,7 @@ function stopRecording() {
             const audioUrl = URL.createObjectURL(blob);
             const downloadLink = document.createElement('a');
             downloadLink.href = audioUrl;
-            downloadLink.download = 'recorded_audio.wav';
+            downloadLink.download = 'Nih Hasil Rekamannya.wav';
             downloadLink.click();
             audioChunks = []; // Reset audioChunks setelah diunduh
             recordingStatus.textContent = 'Ready to record';

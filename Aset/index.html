@@ -119,6 +119,24 @@
       opacity: 0.2;
       background: url('https://i.pinimg.com/originals/84/c4/28/84c4280f6236acbc78cac347c63ed89b.png') center/cover no-repeat;
     }
+    .record-controls {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      max-width: 300px;
+      margin-top: 30px;
+    }
+    
+    .record-controls button {
+      width: 45%; /* Mengatur lebar agar tombol sejajar */
+      height: 100px;
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+    
   </style>
 </head>
 
@@ -131,22 +149,16 @@
     <div id="note" class="piano">
       <!-- Piano keys akan ditambahkan secara dinamis di sini -->
     </div>
-    <!--<div class="controls">
-      <button id="recordBtn">Record</button>
-      <button id="stopBtn" disabled>Stop</button>
-      <button id="saveBtn" disabled>Save to WAV</button>
+    <div class="controls">
+      <div class="record-controls">
+        <button id="startRecordingBtn">Mulai Rekaman</button>
+        <button id="stopRecordingBtn">Hentikan & Download Rekaman</button>
+      </div>
     </div>
-    <p id="recordingStatus">Ready to record</p>
-  </div>-->
-    <div class="column record-controls">
-      <button id="startRecordingBtn">Mulai Rekaman</button>
-      <button id="stopRecordingBtn">Hentikan Rekaman</button>
-
-    </div>
-
-    <script src="virtualPiano.js"> </script>
-    <script src="convertAudio.js"> </script>
-
+    <script src="virtualPiano.js"></script>
+    <script src="convertAudio.js"></script>
+  </div>
 </body>
+
 
 </html>
