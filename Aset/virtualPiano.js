@@ -1,6 +1,33 @@
 const chords = ["c", "d", "e", "f", "G", "a", "B"];
 const note = document.getElementById("note");
 const recordingStatus = document.getElementById("recordingStatus");
+const keyMappings = {
+  'KeyZ': 'c',
+  'KeyX': 'd',
+  'KeyC': 'e',
+  'KeyV': 'f',
+  'KeyB': 'G',
+  'KeyN': 'a',
+  'KeyM': 'B'
+};
+
+document.addEventListener('keydown', function(event) {
+  // Periksa apakah tombol yang ditekan ada dalam mapping
+  if (event.code in keyMappings) {
+      // Dapatkan nada yang sesuai dengan tombol yang ditekan
+      const soundToPlay = keyMappings[event.code];
+      // Panggil fungsi playSound dengan nada yang sesuai
+      playSound(soundToPlay);
+  }
+});
+
+// Fungsi playSound untuk memainkan suara berdasarkan input nada
+function playSound(chord) {
+  const audio = new Audio(`${chord}.wav`);
+  audio.volume = 0.5;
+  audio.currentTime = 0;
+  audio.play();
+}
 
 let mediaRecorder;
 let audioChunks = []; // Menggunakan audioChunks agar konsisten dengan variabel
@@ -21,6 +48,7 @@ chords.forEach(chord => {
 
     note.appendChild(button);
 });
+
 
 function startRecording() {
     navigator.mediaDevices.getUserMedia({ audio: true })
