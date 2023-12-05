@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Virtual Piano</title>
+  <title>Ini Buat Coba Virtual Piano</title>
   <style>
     body {
       font-family: 'Gotham', sans-serif;
@@ -125,22 +125,28 @@
 <body>
   <div class="background-decoration"></div>
   <header>
-    <h3>VIRTUAL PIANO</h3>
+    <h3>INI BUAT COBA VIRTUAL PIANO</h3>
   </header>
   <div class="container">
     <div id="note" class="piano">
       <!-- Piano keys akan ditambahkan secara dinamis di sini -->
     </div>
-    <div class="controls">
+    <!--<div class="controls">
       <button id="recordBtn">Record</button>
       <button id="stopBtn" disabled>Stop</button>
       <button id="saveBtn" disabled>Save to WAV</button>
     </div>
     <p id="recordingStatus">Ready to record</p>
-  </div>
+  </div>-->
+    <div class="column record-controls">
+      <button id="startRecordingBtn">Mulai Rekaman</button>
+      <button id="stopRecordingBtn">Hentikan Rekaman</button>
 
-  <script src="virtualPiano.js"> </script>
-  <script src="virtualPiano.js"> </script>
+    </div>
+
+    <script src="virtualPiano.js"> </script>
+    <script src="convertAudio.js"> </script>
+
 </body>
 
 </html>
